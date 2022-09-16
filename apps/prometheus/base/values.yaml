@@ -23,6 +23,12 @@ kube-prometheus-stack:
       enabled: true
       hosts:
         - grafana.localhost
+    persistence:
+      type: pvc
+      enabled: true
+      accessModes: ["ReadWriteOnce"]
+      size: 1Gi
+
   prometheus:
     thanosIngress:
       enabled: false
@@ -42,4 +48,4 @@ kube-prometheus-stack:
             accessModes: ["ReadWriteOnce"]
             resources:
               requests:
-                storage: 1Gi
+                storage: 2Gi
