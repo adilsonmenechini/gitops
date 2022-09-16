@@ -1,6 +1,7 @@
-namespaceOverride: "monitoring"
+
 
 kube-prometheus-stack:
+  namespaceOverride: "monitoring"
   pushgateway:
     enabled: false
   alertmanager:
@@ -15,8 +16,9 @@ kube-prometheus-stack:
             accessModes: ["ReadWriteOnce"]
             resources:
               requests:
-                storage: 5Gi
+                storage: 1Gi
   grafana:
+    adminPassword: gra@07@5A_@
     ingress:
       enabled: true
       hosts:
