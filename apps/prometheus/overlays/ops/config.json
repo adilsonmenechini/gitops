@@ -6,6 +6,7 @@
   "srcPath": "apps/prometheus/overlays/ops",
   "srcRepoURL": "https://github.com/adilsonmenechini/gitops.git",
   "srcTargetRevision": "",
+  "CreateNamespace": true,
   "labels": {
     "project": "prometheus"
   },
