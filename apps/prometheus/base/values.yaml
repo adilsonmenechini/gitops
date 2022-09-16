@@ -1,103 +1,56 @@
 ---
-# prometheus:
-#   prometheusSpec:
-#     externalUrl: http://localhost:9090/prometheus
-#     routePrefix: /prometheus
-#   ingress:
-#     enabled: true
-#     paths:
-#       - /prometheus
+# -- Values passed to the kube-prometheus-stack chart 
+kube-prometheus-stack:
+  thanosObjectStorageConfig:
 
-# grafana:
-#   ingress:
-#     enabled: true
-#     path: /grafana
-#   plugins:
-#     - grafana-polystat-panel
-#   grafana.ini:
-#     server:
-#       root_url: http://localhost:3000/grafana
-#       serve_from_sub_path: true
+  kubeControllerManager:
+    enabled: false
 
-prometheusOperator:
-  podAnnotations:
-    sidecar.istio.io/inject: 'false'
-    galley.istio.io/analyze-suppress: IST0103 # No sidecar
+  kubeEtcd:
+    enabled: false
 
-  admissionWebhooks:
-    patch:
-      podAnnotations:
-        sidecar.istio.io/inject: 'false'
-        galley.istio.io/analyze-suppress: IST0103 # No sidecar
+  kubeScheduler:
+    enabled: false
 
-prometheus:
-  prometheusSpec:
-    # Override auto-generated `alertingEndpoints` with mTLS certs:
-    alertingEndpoints:
-    - name: prometheus-kube-prometheus-alertmanager
-      namespace: metrics
-      port: http-web
-      pathPrefix: /
-      apiVersion: v2
-      scheme: https
-      tlsConfig:
-        caFile: /etc/istio-certs/root-cert.pem
-        keyFile: /etc/istio-certs/key.pem
-        certFile: /etc/istio-certs/cert-chain.pem
-        insecureSkipVerify: true
+  kubeProxy:
+    enabled: false
 
-    volumeMounts:
-    - name: istio-certs
-      mountPath: /etc/istio-certs/
-      readOnly: true
+  prometheusOperator:
+    manageCrds: false
+    tls:
+      enabled: false  # disable for now as I could not make it work
+    tlsProxy:
+      enabled: false  # disable for now as I could not make it work
+    admissionWebhooks:
+      enabled: false  # disable for now as I could not make it work
 
-    podMetadata:
-      # Write Istio certificates to a volume accessible by Prometheus:
-      annotations:
-        sidecar.istio.io/rewriteAppHTTPProbers: 'true'
-        sidecar.istio.io/userVolume: '[{"name": "istio-certs", "emptyDir": {"medium": "Memory"}}]'
-        sidecar.istio.io/userVolumeMount: '[{"name": "istio-certs", "mountPath": "/etc/istio-certs/"}]'
-        proxy.istio.io/config: |-
-          proxyMetadata:
-            OUTPUT_CERTS: /etc/istio-certs/
+  prometheus:
+    prometheusSpec:
+      ruleSelectorNilUsesHelmValues: false
+      serviceMonitorSelectorNilUsesHelmValues: false
+      podMonitorSelectorNilUsesHelmValues: false
+      thanos:
+        image: quay.io/thanos/thanos:v0.15.0
+        version: v0.15.0
+    additionalPodMonitors:
+      - name: traefik
+        jobLabel: traefik
+        selector:
+          matchLabels:
+            app.kubernetes.io/instance: traefik
+            app.kubernetes.io/name: traefik
+        namespaceSelector:
+          any: true
+        podMetricsEndpoints:
+          - port: traefik
+            path: /metrics
+            scheme: http
 
-alertmanager:
-  alertmanagerSpec:
-    podMetadata:
-      annotations:
-        sidecar.istio.io/rewriteAppHTTPProbers: 'true'
-        traffic.sidecar.istio.io/excludeInboundPorts: '9094'  # Cluster autodiscovery.
-        traffic.sidecar.istio.io/excludeOutboundPorts: '9094' # Cluster autodiscovery.
-
-  serviceMonitor:
-    scheme: https
-    tlsConfig:
-      caFile: /etc/istio-certs/root-cert.pem
-      keyFile: /etc/istio-certs/key.pem
-      certFile: /etc/istio-certs/cert-chain.pem
-      insecureSkipVerify: true
-
-kube-state-metrics:
-  podAnnotations:
-    sidecar.istio.io/rewriteAppHTTPProbers: 'true'
-
-grafana:
-  podAnnotations:
-    sidecar.istio.io/rewriteAppHTTPProbers: 'true'
-
-prometheus-node-exporter:
-  nodeSelector:
-    beta.kubernetes.io/os: linux
-  podAnnotations:
-    galley.istio.io/analyze-suppress: IST0103 # No sidecar
-
-# These components are running on the AKS master nodes and not accessible by my deployments.
-# However, this patching approach can be applied to them as well.
-kubeProxy:
-  enabled: false # Enable once https://github.com/Azure/AKS/issues/1695 is released
-kubeEtcd:
-  enabled: false
-kubeControllerManager:
-  enabled: false
-kubeScheduler:
-  enabled: false
+  grafana:
+    sidecar:
+      dashboards:
+        searchNamespace: ALL
+      datasources:
+        searchNamespace: ALL
+    plugins:
+      - grafana-piechart-panel
