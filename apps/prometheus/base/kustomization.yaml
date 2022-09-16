@@ -3,6 +3,17 @@ kind: Kustomization
 helmCharts:
 - name: kube-prometheus-stack 
   releaseName: kube-prometheus-stack 
-  version: 35.0.3
+  version: 34.10.0
   repo: https://prometheus-community.github.io/helm-charts
   valuesFile: values.yaml
+  patchesJson6902:
+  - target:
+      group: "apiextensions.k8s.io"
+      version: v1
+      kind: CustomResourceDefinition
+      name: "prometheuses.monitoring.coreos.com"
+    patch: |-
+      - op: add
+        path: "/metadata/annotations"
+        value:
+          "argocd.argoproj.io/sync-options": "Replace=true" 
