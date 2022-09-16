@@ -7,9 +7,6 @@ helmCharts:
   repo: https://prometheus-community.github.io/helm-charts
   #includeCRDs: true
   valuesFile: values.yaml
-resources:
-- thanos-storageconfig.yml
-- networking.yaml
 
 # patches:
 # # Apply mTLS patch to selected service monitors to use the injected mTLS
