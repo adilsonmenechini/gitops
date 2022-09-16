@@ -1,3 +1,5 @@
+namespaceOverride: "monitoring"
+
 kube-prometheus-stack:
   pushgateway:
     enabled: false
