@@ -5,5 +5,4 @@ helmCharts:
   releaseName: argo-events 
   #version: 1.15.0
   repo: https://argoproj.github.io/argo-helm
-  includeCRDs: true
 

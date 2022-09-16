@@ -5,5 +5,4 @@ helmCharts:
   releaseName: argo-cd 
   version: 4.5.8
   repo: https://argoproj.github.io/argo-helm
-  includeCRDs: true
 
