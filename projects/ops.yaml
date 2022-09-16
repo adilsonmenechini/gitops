@@ -14,8 +14,12 @@ spec:
     kind: '*'
   description: ops project
   destinations:
-  - namespace: '*'
-    server: '*'
+    - namespace: kube-system
+      server: https://kubernetes.default.svc
+    - namespace: argocd
+      server: https://kubernetes.default.svc
+    - namespace: monitoring
+      server: https://kubernetes.default.svc
   namespaceResourceWhitelist:
   - group: '*'
     kind: '*'
