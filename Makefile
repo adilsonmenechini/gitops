@@ -11,4 +11,4 @@ cluster:
 	--k3s-arg "--disable=traefik@server:*" --kubeconfig-switch-context
 
 delcluster:
-	k3d cluster create k8s
+	k3d cluster delete k8s
