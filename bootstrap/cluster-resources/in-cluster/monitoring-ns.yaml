@@ -3,7 +3,7 @@ kind: Namespace
 metadata:
   annotations:
     argocd.argoproj.io/sync-options: Prune=false
-    "argocd.argoproj.io/sync-options": "Replace=true"
+    argocd.argoproj.io/sync-options": Replace=true
   creationTimestamp: null
   name: monitoring
 spec: {}
