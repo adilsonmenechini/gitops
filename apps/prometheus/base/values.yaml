@@ -1,33 +1,41 @@
----
 kube-prometheus-stack:
-  thanosObjectStorageConfig:
-
-  kubeControllerManager:
+  pushgateway:
     enabled: false
-
-  kubeEtcd:
-    enabled: false
-
-  kubeScheduler:
-    enabled: false
-
-  kubeProxy:
-    enabled: false
-
-  prometheusOperator:
-    manageCrds: false
-    tls:
-      enabled: false  # disable for now as I could not make it work
-    tlsProxy:
-      enabled: false  # disable for now as I could not make it work
-    admissionWebhooks:
-      enabled: false  # disable for now as I could not make it work
-
+  alertmanager:
+    ingress:
+      enabled: true
+      hosts:
+        - alertmanager.localhost
+    alertmanagerSpec:
+      storage:
+        volumeClaimTemplate:
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 5Gi
   grafana:
-    sidecar:
-      dashboards:
-        searchNamespace: ALL
-      datasources:
-        searchNamespace: ALL
-    plugins:
-      - grafana-piechart-panel
+    ingress:
+      enabled: true
+      hosts:
+        - grafana.localhost
+  prometheus:
+    thanosIngress:
+      enabled: false
+      hosts:
+        - thanos-gateway.localhost
+    ingress:
+      enabled: true
+      hosts:
+        - prometheus.localhost
+    prometheusSpec:
+      # serviceMonitorSelector:
+      #   matchLabels:
+      #     prometheus: monitor
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 1Gi
