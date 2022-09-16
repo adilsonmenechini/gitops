@@ -1,5 +1,0 @@
-global:
-  istioNamespace: istio-system
-  configValidation: false
-  istiod:
-    enableAnalysis: true
