@@ -4,6 +4,7 @@ configMapGenerator:
   literals:
   - admin.enabled=true
   - kustomize.buildOptions="--enable-alpha-plugins --enable-helm --load-restrictor LoadRestrictionsNone"
+  - statusbadge.enabled=true
   - |
     repository.credentials=- passwordSecret:
         key: git_token
