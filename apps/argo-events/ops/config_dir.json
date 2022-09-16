@@ -3,7 +3,7 @@
   "userGivenName": "argo-events",
   "destNamespace": "default",
   "destServer": "https://kubernetes.default.svc",
-  "srcPath": "manifests/namespace-install",
+  "srcPath": "manifests/install.yaml",
   "srcRepoURL": "https://github.com/argoproj/argo-events.git",
   "srcTargetRevision": "",
   "labels": null,
