@@ -39,7 +39,7 @@ kube-prometheus-stack:
               requests:
                 storage: 1Gi
   grafana:
-    adminPassword: gra@07@5A_@
+    #adminPassword: gra@07@5A_@
     sidecar:
       dashboards:
         searchNamespace: ALL
