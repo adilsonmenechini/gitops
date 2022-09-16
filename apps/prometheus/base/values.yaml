@@ -40,6 +40,13 @@ kube-prometheus-stack:
                 storage: 1Gi
   grafana:
     adminPassword: gra@07@5A_@
+    sidecar:
+      dashboards:
+        searchNamespace: ALL
+      datasources:
+        searchNamespace: ALL
+    plugins:
+      - grafana-piechart-panel
     ingress:
       enabled: true
       hosts:
