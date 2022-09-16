@@ -1,56 +1,82 @@
----
-# -- Values passed to the kube-prometheus-stack chart 
-kube-prometheus-stack:
-  thanosObjectStorageConfig:
+prometheusOperator:
+  podAnnotations:
+    sidecar.istio.io/inject: 'false'
+    galley.istio.io/analyze-suppress: IST0103 # No sidecar
 
-  kubeControllerManager:
-    enabled: false
+  admissionWebhooks:
+    patch:
+      podAnnotations:
+        sidecar.istio.io/inject: 'false'
+        galley.istio.io/analyze-suppress: IST0103 # No sidecar
 
-  kubeEtcd:
-    enabled: false
+prometheus:
+  prometheusSpec:
+    # Override auto-generated `alertingEndpoints` with mTLS certs:
+    alertingEndpoints:
+    - name: prometheus-kube-prometheus-alertmanager
+      namespace: metrics
+      port: http-web
+      pathPrefix: /
+      apiVersion: v2
+      scheme: https
+      tlsConfig:
+        caFile: /etc/istio-certs/root-cert.pem
+        keyFile: /etc/istio-certs/key.pem
+        certFile: /etc/istio-certs/cert-chain.pem
+        insecureSkipVerify: true
 
-  kubeScheduler:
-    enabled: false
+    volumeMounts:
+    - name: istio-certs
+      mountPath: /etc/istio-certs/
+      readOnly: true
 
-  kubeProxy:
-    enabled: false
+    podMetadata:
+      # Write Istio certificates to a volume accessible by Prometheus:
+      annotations:
+        sidecar.istio.io/rewriteAppHTTPProbers: 'true'
+        sidecar.istio.io/userVolume: '[{"name": "istio-certs", "emptyDir": {"medium": "Memory"}}]'
+        sidecar.istio.io/userVolumeMount: '[{"name": "istio-certs", "mountPath": "/etc/istio-certs/"}]'
+        proxy.istio.io/config: |-
+          proxyMetadata:
+            OUTPUT_CERTS: /etc/istio-certs/
 
-  prometheusOperator:
-    manageCrds: false
-    tls:
-      enabled: false  # disable for now as I could not make it work
-    tlsProxy:
-      enabled: false  # disable for now as I could not make it work
-    admissionWebhooks:
-      enabled: false  # disable for now as I could not make it work
+alertmanager:
+  alertmanagerSpec:
+    podMetadata:
+      annotations:
+        sidecar.istio.io/rewriteAppHTTPProbers: 'true'
+        traffic.sidecar.istio.io/excludeInboundPorts: '9094'  # Cluster autodiscovery.
+        traffic.sidecar.istio.io/excludeOutboundPorts: '9094' # Cluster autodiscovery.
 
-  prometheus:
-    prometheusSpec:
-      ruleSelectorNilUsesHelmValues: false
-      serviceMonitorSelectorNilUsesHelmValues: false
-      podMonitorSelectorNilUsesHelmValues: false
-      thanos:
-        image: quay.io/thanos/thanos:v0.15.0
-        version: v0.15.0
-    additionalPodMonitors:
-      - name: traefik
-        jobLabel: traefik
-        selector:
-          matchLabels:
-            app.kubernetes.io/instance: traefik
-            app.kubernetes.io/name: traefik
-        namespaceSelector:
-          any: true
-        podMetricsEndpoints:
-          - port: traefik
-            path: /metrics
-            scheme: http
+  serviceMonitor:
+    scheme: https
+    tlsConfig:
+      caFile: /etc/istio-certs/root-cert.pem
+      keyFile: /etc/istio-certs/key.pem
+      certFile: /etc/istio-certs/cert-chain.pem
+      insecureSkipVerify: true
 
-  grafana:
-    sidecar:
-      dashboards:
-        searchNamespace: ALL
-      datasources:
-        searchNamespace: ALL
-    plugins:
-      - grafana-piechart-panel
+kube-state-metrics:
+  podAnnotations:
+    sidecar.istio.io/rewriteAppHTTPProbers: 'true'
+
+grafana:
+  podAnnotations:
+    sidecar.istio.io/rewriteAppHTTPProbers: 'true'
+
+prometheus-node-exporter:
+  nodeSelector:
+    beta.kubernetes.io/os: linux
+  podAnnotations:
+    galley.istio.io/analyze-suppress: IST0103 # No sidecar
+
+# These components are running on the AKS master nodes and not accessible by my deployments.
+# However, this patching approach can be applied to them as well.
+kubeProxy:
+  enabled: false # Enable once https://github.com/Azure/AKS/issues/1695 is released
+kubeEtcd:
+  enabled: false
+kubeControllerManager:
+  enabled: false
+kubeScheduler:
+  enabled: false
