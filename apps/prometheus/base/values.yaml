@@ -1,7 +1,6 @@
 
 
 kube-prometheus-stack:
-  namespaceOverride: "monitoringtest"
   pushgateway:
     enabled: false
   alertmanager:
