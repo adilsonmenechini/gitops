@@ -10,5 +10,7 @@
   "labels": {
     "project": "prometheus"
   },
-  "annotations": null
+  "annotations":{
+    "argocd.argoproj.io/sync-wave": "-3"
+}
 }
