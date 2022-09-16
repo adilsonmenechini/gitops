@@ -22,9 +22,9 @@ INFO run:
 argocd-autopilot project create ops
 
 # Application
-argocd-autopilot app create istio-base \
+argocd-autopilot app create istio-ingress \
  --app https://istio-release.storage.googleapis.com/charts \
-  -p ops --labels "project=istio"  --dest-namespace istio-system \
+  -p ops --labels "istio-injection=enabled"  --dest-namespace istio-ingress \
   --type kustomize
 
 ```
