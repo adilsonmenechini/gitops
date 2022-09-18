@@ -65,6 +65,37 @@ spec:
               jsonnet: {}
               recurse: true
             repoURL: ""
+  - git:
+      files:
+      - path: apps/**/**/ops/config.json
+      repoURL: https://github.com/adilsonmenechini/gitops.git
+      requeueAfterSeconds: 20
+      revision: ""
+      template:
+        metadata: {}
+        spec:
+          destination: {}
+          project: ""
+          source:
+            repoURL: ""
+  - git:
+      files:
+      - path: apps/**/**/ops/config_dir.json
+      repoURL: https://github.com/adilsonmenechini/gitops.git
+      requeueAfterSeconds: 20
+      revision: ""
+      template:
+        metadata: {}
+        spec:
+          destination: {}
+          project: ""
+          source:
+            directory:
+              exclude: '{{ exclude }}'
+              include: '{{ include }}'
+              jsonnet: {}
+              recurse: true
+            repoURL: ""
   syncPolicy: {}
   template:
     metadata:
