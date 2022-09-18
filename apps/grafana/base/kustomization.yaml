@@ -5,6 +5,7 @@ resources:
   releaseName: grafana 
   #version: 34.10.0
   repo: https://charts.helm.sh/stable
+  valuesFile: values.yaml
   includeCRDs: true
 
 
