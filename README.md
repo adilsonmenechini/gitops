@@ -22,7 +22,7 @@ argocd-autopilot project create ops
 
 # application
 
-argocd-autopilot app create hello-world --app github.com/argoproj-labs/argocd-autopilot/examples/demo-app/ -p ops
+argocd-autopilot app create argo-events --app github.com/argoproj-labs/argocd-autopilot/examples/demo-app/ -p ops --labels "istio-injection=enabled"  --dest-namespace argo-events
 
 
 argocd-autopilot app create istio-ingress \
