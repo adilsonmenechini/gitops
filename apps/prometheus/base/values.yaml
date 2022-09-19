@@ -1,41 +1,59 @@
 alertmanager:
-  enabled: true
-  alertmanagerSpec:
-    storage: 
-      volumeClaimTemplate:
-        spec:
-          #storageClassName: gp2
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 1Gi
+  storage:
+    volumeClaimTemplate:
+      spec:
+        storageClassName: gluster
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 2Gi
+  ingress:
+    enabled: true
+    hosts:
+      - alertmanager.localhost
+    paths:
+      - /
 
 grafana:
-  enabled: true
-
+  adminPassword: admin
+  serviceMonitor:
+    labels:
+      release: kps
   persistence:
     type: pvc
     enabled: true
-    #storageClassName: gp2
-    accessModes: ["ReadWriteOnce"]
-    size: 5Gi
+    # storageClassName: default
+    accessModes:
+      - ReadWriteOnce
+    size: 2Gi
+  ingress:
+    enabled: true
+    hosts:
+      - grafana.localhost
+    path: /
 
 prometheus:
-  enabled: true 
   prometheusSpec:
-    storageSpec:
-      volumeClaimTemplate:
-        spec:
-          accessModes: ["ReadWriteOnce"]    
-          resources:
-            requests:
-              storage: 1Gi
-          #storageClassName: gp2
+    secrets:
+    - etcd-certs
+    prometheusSpec:
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            resources:
+              requests:
+                storage: 5Gi 
+  ingress:
+    enabled: true
+    hosts:
+      - prometheus.localhost
+    paths:
+      - /
 
-    retention: 14d
-
-
-kubeStateMetrics:
-  enabled: true
-nodeExporter:
-  enabled: true
+kubeEtcd:
+  serviceMonitor:
+    scheme: https
+    insecureSkipVerify: false
+    caFile:   /etc/prometheus/secrets/etcd-certs/ca.crt
+    certFile: /etc/prometheus/secrets/etcd-certs/server.crt
+    keyFile:  /etc/prometheus/secrets/etcd-certs/server.key
