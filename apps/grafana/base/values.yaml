@@ -8,33 +8,7 @@ resources:
     memory: 256Mi
 grafana.ini:
   server:
-    domain: grafana.diegoluisi.eti.br
-admin:
-  ## Name of the secret. Can be templated.
-  existingSecret: "grafana-secrets"
-  userKey: GF_SECURITY_ADMIN_USER
-  passwordKey: GF_SECURITY_ADMIN_PASSWORD
-persistence:
-  type: pvc
-  enabled: true
-envValueFrom:
-  GF_AUTH_GITHUB_CLIENT_ID:
-    secretKeyRef:
-      name: grafana-secrets
-      key: GF_AUTH_GITHUB_CLIENT_ID
-  GF_AUTH_GITHUB_CLIENT_SECRET:
-    secretKeyRef:
-      name: grafana-secrets
-      key: GF_AUTH_GITHUB_CLIENT_SECRET
-env:
-  # GF_INSTALL_PLUGINS: grafana-simple-json-datasource,alexanderzobnin-zabbix-app
-  GF_SERVER_DOMAIN: grafana.diegoluisi.eti.br
-  GF_SERVER_ROOT_URL: "https://grafana.diegoluisi.eti.br"
-  GF_AUTH_GITHUB_ENABLED: true
-  GF_AUTH_GITHUB_ALLOW_SIGN_UP: true
-  GF_AUTH_GITHUB_SCOPES: 'user:email,read:org'
-  GF_AUTH_GITHUB_ALLOWED_ORGANIZATIONS: devxp-tech
-  GF_AUTO_ASSIGN_ORG_ROLE: Admin
+    domain: grafana.localhost
 
 autoscaling:
   enabled: true
@@ -102,7 +76,7 @@ sidecar:
     label: grafana_dashboard
     labelValue: "1"
     folder: /var/lib/grafana/dashboards/external
-    folderAnnotation: grafana.diegoluisi.eti.br/dashboard-folder
+    folderAnnotation: grafana.localhost/dashboard-folder
 #      searchNamespace: ALL
     provider:
       disableDelete: false
@@ -114,7 +88,6 @@ sidecar:
     labelValue: "1"
 
 plugins:
-  - grafana-github-datasource
   - grafana-piechart-panel
 
 dashboardProviders:
@@ -169,85 +142,3 @@ dashboardProviders:
       editable: true
       options:
         path: /var/lib/grafana/dashboards/loki
-dashboards:
-  default:
-    # Kubernetes dashboards
-    core-dns:
-      datasource: Prometheus
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/kubernetes/core-dns.json"
-    k8s-addons-starboard-operator:
-      datasource: Prometheus
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/kubernetes/k8s-addons-starboard-operator.json"
-    k8s-system-api-server:
-      datasource: Prometheus
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/kubernetes/k8s-system-api-server.json"
-    k8s-system-coredns:
-      datasource: Prometheus
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/kubernetes/k8s-system-coredns.json"
-    k8s-views-global:
-      datasource: Prometheus
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/kubernetes/k8s-views-global.json"
-    k8s-views-namespaces:
-      datasource: Prometheus
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/kubernetes/k8s-views-namespaces.json"
-    k8s-views-nodes:
-      datasource: Prometheus
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/kubernetes/k8s-views-nodes.json"
-    k8s-views-pods:
-      datasource: Prometheus
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/kubernetes/k8s-views-pods.json"
-    k8s_views_global-kubernetes-views-global:
-      datasource: Prometheus
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/kubernetes/k8s_views_global-kubernetes-views-global.json"
-    k8s_views_nodes-kubernetes-views-nodes:
-      datasource: Prometheus
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/kubernetes/k8s_views_nodes-kubernetes-views-nodes.json"
-    k8s_views_ns-kubernetes-views-namespaces:
-      datasource: Prometheus
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/kubernetes/k8s_views_ns-kubernetes-views-namespaces.json"
-    k8s_views_pods-kubernetes-views-pods:
-      datasource: Prometheus
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/kubernetes/k8s_views_pods-kubernetes-views-pods.json"
-    node-exporter-full:
-      datasource: Prometheus
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/kubernetes/node-exporter-full.json"
-  alertmanager:
-    # Alertmanager dashboards
-    alertmanager-default:
-      datasource: Prometheus
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/alertmanager/alertmanager.json"
-  argocd:
-    # ArgoCD dashboards
-    argocd-default:
-      datasource: Prometheus
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/argocd/dashboard.json"
-  github:
-    # GitHub dashboards
-    github-default:
-      datasource: GitHub
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/github/github-default.json"
-    github-organization:
-      datasource: GitHub
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/github/github-organization.json"
-  istio:
-    # Istio dashboards
-    istio-control-plane-dashboard:
-      datasource: Prometheus
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/istio/istio-control-plane-dashboard.json"
-    istio-mesh-dashboard:
-      datasource: Prometheus
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/istio/istio-mesh-dashboard.json"
-    istio-service-dashboard:
-      datasource: Prometheus
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/istio/istio-service-dashboard.json"
-    istio-wasm-extension-dashboard:
-      datasource: Prometheus
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/istio/istio-wasm-extension-dashboard.json"
-    istio-workload-dashboard:
-      datasource: Prometheus
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/istio/istio-workload-dashboard.json"
-  loki:
-    # Loki dashboards
-    dashboard:
-      datasource: Loki
-      url: "https://raw.githubusercontent.com/devxp-tech/grafana-dashboards/main/dashboards/loki/loki_stack_monitoring_quortex.json"
