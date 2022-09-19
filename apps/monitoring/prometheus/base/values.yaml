@@ -1,4 +1,4 @@
-nameOverride: "k8s"
+#nameOverride: "k8s"
 alertmanager:
   config:
     receivers:
