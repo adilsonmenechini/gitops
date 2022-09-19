@@ -36,6 +36,8 @@ prometheus:
 prometheusOperator:
   admissionWebhooks:
     enabled: false
+  tls:
+    enabled: false
 grafana:
   persistence:
     enabled: true
