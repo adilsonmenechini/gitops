@@ -2,6 +2,8 @@
 alertmanager:
   ingress:
     enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
     hosts:
       - alertmanager.localhost
     paths:
@@ -25,6 +27,8 @@ alertmanager:
 prometheus:
   ingress:
     enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
     hosts:
       - prometheus.localhost
     paths:
@@ -51,6 +55,8 @@ prometheus:
 grafana:
   ingress:
     enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
     hosts:
       - grafana.localhost
     path: /
@@ -60,7 +66,5 @@ grafana:
     size: 1Gi
 
 prometheusOperator:
-  admissionWebhooks:
-    enabled: true
   tls:
     enabled: false
