@@ -1,40 +1,59 @@
+alertmanager:
+  storage:
+    volumeClaimTemplate:
+      spec:
+        storageClassName: gluster
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 2Gi
+  ingress:
+    enabled: true
+    hosts:
+      - alertmanager.192-168-49-2.nip.io
+    paths:
+      - /
+
+grafana:
+  adminPassword: admin
+  serviceMonitor:
+    labels:
+      release: kps
+  persistence:
+    type: pvc
+    enabled: true
+    # storageClassName: default
+    accessModes:
+      - ReadWriteOnce
+    size: 2Gi
+  ingress:
+    enabled: true
+    hosts:
+      - grafana.192-168-49-2.nip.io
+    path: /
+
 prometheus:
   prometheusSpec:
-    storageSpec:
-      volumeClaimTemplate:
-        spec:
-          accessModes: ["ReadWriteMany"]
-          storageClassName: managed-nfs
-          resources:
-            requests:
-              storage: 2Gi
+    secrets:
+    - etcd-certs
+    prometheusSpec:
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            resources:
+              requests:
+                storage: 5Gi 
+  ingress:
+    enabled: true
+    hosts:
+      - prometheus.192-168-49-2.nip.io
+    paths:
+      - /
 
-# Define persistent storage for Alertmanager (PVC)
-alertmanager:
-  alertmanagerSpec:
-    storage:
-      volumeClaimTemplate:
-        spec:
-          accessModes: ["ReadWriteMany"]
-          storageClassName: managed-nfs
-          resources:
-            requests:
-              storage: 2Gi
-
-# Change default node-exporter port
-prometheus-node-exporter:
-  service:
-    port: 30206
-    targetPort: 30206
-
-# Disable Etcd metrics
 kubeEtcd:
-  enabled: true
-
-# Disable Controller metrics
-kubeControllerManager:
-  enabled: true
-
-# Disable Scheduler metrics
-kubeScheduler:
-  enabled: true
+  serviceMonitor:
+    scheme: https
+    insecureSkipVerify: false
+    caFile:   /etc/prometheus/secrets/etcd-certs/ca.crt
+    certFile: /etc/prometheus/secrets/etcd-certs/server.crt
+    keyFile:  /etc/prometheus/secrets/etcd-certs/server.key
