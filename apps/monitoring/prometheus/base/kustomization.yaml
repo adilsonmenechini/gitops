@@ -3,7 +3,7 @@ kind: Kustomization
 helmCharts:
 - name: prometheus-adapter
   releaseName: prometheus-adapter
-  version: 34.10.0
+  #version: 34.10.0
   repo: https://charts.helm.sh/stable
   includeCRDs: true
   valuesFile: values.yaml
