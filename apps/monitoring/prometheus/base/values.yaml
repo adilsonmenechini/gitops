@@ -3,7 +3,7 @@ nameOverride: prometheus-adapter
 prometheus:
   url: "http://prometheus-operator-prometheus.monitoring.svc"
   port: 9090
-resources: {}
+resources:
   requests:
     cpu: 100m
     memory: 128Mi
