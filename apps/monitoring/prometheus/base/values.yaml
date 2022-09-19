@@ -33,13 +33,14 @@ prometheus:
           resources:
             requests:
               storage: 2Gi
-prometheusOperator:
-  admissionWebhooks:
-    enabled: false
-  tls:
-    enabled: false
+
+
 grafana:
   persistence:
     enabled: true
     storageClassName: standard
     size: 1Gi
+
+prometheusOperator:
+  tls:
+    enabled: false
