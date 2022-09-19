@@ -38,4 +38,8 @@ argocd-autopilot app create prometheus \
 
 
 argocd-autopilot app delete prometheus -p ops
+
+
+kubectl get secret grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+
 ```
