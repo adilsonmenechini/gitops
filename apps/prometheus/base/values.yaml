@@ -34,15 +34,17 @@ grafana:
 
 prometheus:
   prometheusSpec:
-    secrets:
-    - etcd-certs
-    prometheusSpec:
-      storageSpec:
-        volumeClaimTemplate:
-          spec:
-            resources:
-              requests:
-                storage: 5Gi 
+    retention: 3d
+
+#    replicas: 2
+#    podAntiAffinity: "hard"
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 10Gi
   ingress:
     enabled: true
     hosts:
@@ -51,9 +53,10 @@ prometheus:
       - /
 
 kubeEtcd:
-  serviceMonitor:
-    scheme: https
-    insecureSkipVerify: false
-    caFile:   /etc/prometheus/secrets/etcd-certs/ca.crt
-    certFile: /etc/prometheus/secrets/etcd-certs/server.crt
-    keyFile:  /etc/prometheus/secrets/etcd-certs/server.key
+  enabled: false
+
+# Disable kube-controller-manager and kube-scheduler monitoring. See https://github.com/cablespaghetti/k3s-monitoring/issues/2
+kubeControllerManager:
+  enabled: false
+kubeScheduler:
+  enabled: false
