@@ -1,6 +1,6 @@
 {
-  "appName": "monitoring/prometheus",
-  "userGivenName": "monitoring/prometheus",
+  "appName": "prometheus",
+  "userGivenName": "prometheus",
   "destNamespace": "monitoring",
   "destServer": "https://kubernetes.default.svc",
   "srcPath": "apps/monitoring/prometheus/overlays/ops",
