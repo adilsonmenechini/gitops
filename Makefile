@@ -8,7 +8,7 @@ cluster:
 	k3d cluster create k8s \
 	--servers 1 --agents 2 \
 	--api-port 127.0.0.1:6443 -p 80:80@loadbalancer -p 443:443@loadbalancer \
-	--k3s-arg "--disable=traefik@server:*" --kubeconfig-switch-context
+	--kubeconfig-switch-context
 
 delcluster:
 	k3d cluster delete k8s
