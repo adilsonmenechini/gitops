@@ -42,5 +42,6 @@ grafana:
     size: 1Gi
 
 prometheusOperator:
+
   tls:
     enabled: false
