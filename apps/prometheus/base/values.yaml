@@ -30,7 +30,7 @@ prometheus:
           resources:
             requests:
               storage: 1Gi
-          storageClassName: gp2
+          #storageClassName: gp2
 
     retention: 14d
 
