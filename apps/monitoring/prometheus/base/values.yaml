@@ -1,5 +1,11 @@
 #nameOverride: "k8s"
 alertmanager:
+  ingress:
+    enabled: true
+    hosts:
+      - alertmanager.localhost
+    paths:
+      - /
   config:
     receivers:
       # TODO: Add email receivers here.
@@ -17,6 +23,12 @@ alertmanager:
             requests:
               storage: 1Gi
 prometheus:
+  ingress:
+    enabled: true
+    hosts:
+      - prometheus.localhost
+    paths:
+      - /
   prometheusSpec:
     retention: 10d
     retentionSize: 1GB
@@ -37,6 +49,11 @@ prometheus:
 
 
 grafana:
+  ingress:
+    enabled: true
+    hosts:
+      - grafana.localhost
+    path: /
   persistence:
     enabled: true
     storageClassName: standard
@@ -47,19 +64,3 @@ prometheusOperator:
     enabled: false
   tls:
     enabled: false
-
-# Disable Etcd metrics
-kubeEtcd:
-  enabled: false
-
-# Disable Controller metrics
-kubeControllerManager:
-  enabled: false
-
-# Disable Scheduler metrics
-kubeScheduler:
-  enabled: false
-
-# Disable alertmanager
-alertmanager:
-  enabled: false
