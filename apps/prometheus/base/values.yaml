@@ -43,20 +43,3 @@ alertmanager:
         source_match:
            alertname: 'Watchdog'
         equal: ['prometheus']
-    receivers:
-    - name: 'null'
-    - name: 'slack'
-      slack_configs:
-      - api_url: 'https://hooks.slack.com/services/YOUR_SLACK_WEBHOOK_HERE' # <--- REPLACE THIS WITH YOUR SLACK WEBHOOK
-        send_resolved: true
-        channel: '#notif-channel' # <--- REPLACE THIS WITH YOUR SLACK CHANNEL
-        title: '[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] Monitoring Event Notification'
-        text: |-
-          {{ range .Alerts }}
-            *Alert:* {{ .Labels.alertname }} - `{{ .Labels.severity }}`
-            *Description:* {{ .Annotations.message }}
-            *Graph:* <{{ .GeneratorURL }}|:chart_with_upwards_trend:> *Runbook:* <{{ .Annotations.runbook_url }}|:spiral_note_pad:>
-            *Details:*
-            {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
-            {{ end }}
-          {{ end }}
