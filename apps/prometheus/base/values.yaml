@@ -10,7 +10,7 @@ alertmanager:
   ingress:
     enabled: true
     hosts:
-      - alertmanager.192-168-49-2.nip.io
+      - alertmanager.localhost
     paths:
       - /
 
@@ -29,7 +29,7 @@ grafana:
   ingress:
     enabled: true
     hosts:
-      - grafana.192-168-49-2.nip.io
+      - grafana.localhost
     path: /
 
 prometheus:
@@ -46,7 +46,7 @@ prometheus:
   ingress:
     enabled: true
     hosts:
-      - prometheus.192-168-49-2.nip.io
+      - prometheus.localhost
     paths:
       - /
 
