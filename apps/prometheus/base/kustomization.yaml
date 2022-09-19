@@ -8,4 +8,6 @@ helmCharts:
   version: 34.10.0
   repo: https://prometheus-community.github.io/helm-charts
   includeCRDs: true
-  valuesFile: values.yaml
+  valuesFilname: |
+    pushgateway:
+          enabled: false
