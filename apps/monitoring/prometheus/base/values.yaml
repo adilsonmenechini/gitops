@@ -72,5 +72,7 @@ grafana:
     size: 1Gi
 
 prometheusOperator:
+  admissionWebhooks:
+    enabled: false
   tls:
     enabled: false
