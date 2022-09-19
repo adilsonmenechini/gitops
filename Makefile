@@ -5,10 +5,10 @@ k3d:
 	wget -q -O - https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash
 
 cluster:
-	k3d cluster create k8s \
+	@k3d cluster create k8s \
 	--servers 1 --agents 2 \
 	--api-port 127.0.0.1:6443 -p 80:80@loadbalancer -p 443:443@loadbalancer \
 	--kubeconfig-switch-context
 
 delcluster:
-	k3d cluster delete k8s
+	@k3d cluster delete k8s
