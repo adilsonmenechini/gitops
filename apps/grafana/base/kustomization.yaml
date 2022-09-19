@@ -3,9 +3,9 @@ kind: Kustomization
 # resources:
 # - create-pv-pvc.yaml
 helmCharts:
-- name: kube-prometheus-stack 
-  releaseName: kube-prometheus-stack 
-  version: 35.0.3
-  repo: https://prometheus-community.github.io/helm-charts
+- name: grafana
+  releaseName: grafana
+  #version: 35.0.3
+  repo: https://charts.helm.sh/stable
   includeCRDs: true
   valuesFile: values.yaml
