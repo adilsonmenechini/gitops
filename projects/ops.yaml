@@ -46,8 +46,6 @@ spec:
           destination: {}
           project: ""
           source:
-            plugin:
-              name: kustomize-build-with-helm
             repoURL: ""
   - git:
       files:
@@ -61,8 +59,6 @@ spec:
           destination: {}
           project: ""
           source:
-            plugin:
-              name: kustomize-build-with-helm
             directory:
               exclude: '{{ exclude }}'
               include: '{{ include }}'
