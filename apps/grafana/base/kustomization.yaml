@@ -6,6 +6,6 @@ helmCharts:
 - name: grafana
   releaseName: grafana
   #version: 35.0.3
-  repo: https://charts.helm.sh/stable
+  repo: https://grafana.github.io/helm-charts
   includeCRDs: true
   valuesFile: values.yaml
