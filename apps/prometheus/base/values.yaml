@@ -1,2 +1,6 @@
 pushgateway:
-      enabled: false
+  enabled: false
+
+prometheusOperator:
+  admissionWebhooks:
+    enabled: false
