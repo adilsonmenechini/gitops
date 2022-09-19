@@ -1,3 +1,4 @@
+nameOverride: "k8s"
 alertmanager:
   config:
     receivers:
@@ -42,6 +43,7 @@ grafana:
     size: 1Gi
 
 prometheusOperator:
-
+  admissionWebhooks:
+    enabled: false
   tls:
     enabled: false
