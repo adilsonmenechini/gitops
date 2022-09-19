@@ -46,6 +46,25 @@ spec:
           destination: {}
           project: ""
           source:
+            chart: '{{ helm.chart }}'
+            helm:
+              valueFiles:
+                - '{{helm.valueFiles}}.yaml'
+              values: |-
+                  {{ helm.values }}
+            repoURL: ""
+  - git:
+      files:
+      - path: apps/**/ops/config.json
+      repoURL: https://github.com/adilsonmenechini/gitops.git
+      requeueAfterSeconds: 20
+      revision: ""
+      template:
+        metadata: {}
+        spec:
+          destination: {}
+          project: ""
+          source:
             repoURL: ""
   - git:
       files:
@@ -92,4 +111,6 @@ spec:
           allowEmpty: true
           prune: true
           selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
 status: {}
