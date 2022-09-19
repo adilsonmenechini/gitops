@@ -33,6 +33,9 @@ prometheus:
           resources:
             requests:
               storage: 2Gi
+prometheusOperator:
+  admissionWebhooks:
+    enabled: false
 grafana:
   persistence:
     enabled: true
