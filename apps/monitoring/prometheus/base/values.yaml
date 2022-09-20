@@ -102,10 +102,10 @@ grafana:
     hosts:
       - grafana.localhost
     path: /
-  persistence:
-    enabled: true
-    storageClassName: standard
-    size: 1Gi
+  # persistence:
+  #   enabled: true
+  #   storageClassName: standard
+  #   size: 1Gi
   plugins:
     - grafana-piechart-panel
   resources:
