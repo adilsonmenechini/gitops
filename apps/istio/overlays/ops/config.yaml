@@ -22,7 +22,7 @@ destNamespace: istio
 destServer: https://kubernetes.default.svc
 srcPath: ''
 #repoURL: https://kubernetes-sigs.github.io/istio-system/
-srcRepoURL: https://github.com/istio/istio/tree/master/operator
+srcRepoURL: http://github.com/istio/istio
 srcTargetRevision: '1.7.0'
 labels:
 exclude: ''
