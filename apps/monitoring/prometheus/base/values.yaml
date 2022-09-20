@@ -102,48 +102,18 @@ grafana:
     hosts:
       - grafana.localhost
     path: /
-  # persistence:
-  #   enabled: true
-  #   storageClassName: standard
-  #   size: 1Gi
+  persistence:
+    enabled: true
+
   plugins:
     - grafana-piechart-panel
   resources:
-    limits:
-      cpu: 500m
+    requests:
+      cpu: 100m
       memory: 128Mi
-    requests:
-      cpu: 25m
-      memory: 64Mi
-
-  sidecar:
-    resources:
-      limits:
-        cpu: 100m
-        memory: 128Mi
-      requests:
-        cpu: 5m
-        memory: 64Mi
-
-  prometheusOperator:
-  resources:
     limits:
-      cpu: 1
-      memory: 512Mi
-    requests:
-      cpu: 50m
-      memory: 128Mi
-  priorityClassName: high-priority
-
-  prometheus-node-exporter:
-  resources:
-    limits:
-      cpu: 50m
-      memory: 50Mi
-    requests:
-      cpu: 5m
-      memory: 16Mi
-  priorityClassName: high-priority
+      cpu: 200m
+      memory: 256Mi
 
 prometheusOperator:
   admissionWebhooks:
