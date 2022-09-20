@@ -4,6 +4,6 @@ helmCharts:
 - name: base
   releaseName: base
   #version: 1.15.0
-  repo: http://github.com/istio/istio
+  chartHome: http://github.com/istio/istio
   includeCRDs: true
   #valuesFile: values.yaml
