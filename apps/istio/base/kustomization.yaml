@@ -1,9 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 helmCharts:
-- name: base
-  releaseName: base
+- name: istio
+  releaseName: istio
   #version: 1.15.0
-  chartHome: http://github.com/istio/istio
+  chartHome: https://github.com/boeboe/istio-helm-charts
   includeCRDs: true
   #valuesFile: values.yaml
