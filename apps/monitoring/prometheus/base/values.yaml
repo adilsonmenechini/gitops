@@ -36,6 +36,15 @@ alertmanager:
     - match:
         alertname: KubeletTooManyPods
       receiver: 'null'
+
+    inhibit_rules:
+    - source_match:
+        severity: 'critical'
+      target_match:
+        severity: 'warning'
+      # Apply inhibition if the alertname is the same.
+      equal: ['alertname', 'namespace']
+
   alertmanagerSpec:
     resources:
       limits:
@@ -104,7 +113,6 @@ grafana:
     path: /
   persistence:
     enabled: true
-
   plugins:
     - grafana-piechart-panel
   resources:
@@ -124,8 +132,82 @@ grafana:
         name: cpu
         targetAverageUtilization: 75
 
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+      - name: Alertmanager
+        type: alertmanager
+        url: http://prometheus-alertmanager
+        uid: alertmanager
+        access: proxy
+        jsonData:
+          implementation: prometheus
+      - name: Loki
+        uid: loki
+        type: loki
+        access: proxy
+        url: http://loki-stack:3100
+        version: 1
+        jsonData:
+          alertmanagerUid: alertmanager
+          maxLines: 5000
+          timeout: "60"
+      - name: Prometheus
+        type: prometheus
+        url: http://prometheus-server
+        access: proxy
+        isDefault: true
+        jsonData:
+          manageAlerts: true
+          alertmanagerUid: alertmanager
+  notifiers:
+    notifiers.yaml:
+      notifiers:
+        - name: prometheus-alertmanager
+          type: prometheus-alertmanager
+          uid: prometheus-alertmanager
+          org_id: 1
+          is_default: true
+          settings:
+            url: http://prometheus-alertmanager
+      delete_notifiers: []
+
+
+  sidecar:
+    plugins:
+      enabled: true
+    notifiers:
+      enabled: false
+    dashboards:
+      enabled: true
+      label: grafana_dashboard
+      labelValue: "1"
+      folder: /var/lib/grafana/dashboards/external
+      folderAnnotation: grafana.diegoluisi.eti.br/dashboard-folder
+#      searchNamespace: ALL
+      provider:
+        disableDelete: false
+        allowUiUpdates: true
+        foldersFromFilesStructure: true
+    datasources:
+      enabled: false
+      label: grafana_datasource
+      labelValue: "1"
+
+
 prometheusOperator:
   admissionWebhooks:
     enabled: false
   tls:
     enabled: false
+
+# Disable etcd monitoring. See https://github.com/cablespaghetti/k3s-monitoring/issues/4
+kubeEtcd:
+  enabled: false
+
+# Disable kube-controller-manager and kube-scheduler monitoring. See https://github.com/cablespaghetti/k3s-monitoring/issues/2
+kubeControllerManager:
+  enabled: false
+kubeScheduler:
+  enabled: false
