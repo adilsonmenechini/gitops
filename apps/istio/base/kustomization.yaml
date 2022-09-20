@@ -20,9 +20,9 @@ helmCharts:
   valuesInline:
     fullnameOverride: istiod
     global:
-      trustDomain: "lgsk8sp1.grupologos.local"
+      trustDomain: "localhost.local"
       proxy:
-        clusterDomain: "lgsk8sp1.grupologos.local"
+        clusterDomain: "localhost.local"
       # Resources for the sidecar.
         resources:
           requests:
