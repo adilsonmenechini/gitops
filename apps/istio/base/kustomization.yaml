@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 helmCharts:
 - name: istio
-  releaseName: istio-official
+  releaseName: istiod
   version: 1.13.3
   repo: https://istio-release.storage.googleapis.com/charts
   includeCRDs: true
