@@ -4,6 +4,6 @@ helmCharts:
 - name: istio
   releaseName: istio
   #version: 1.15.0
-  chartHome: https://github.com/boeboe/istio-helm-charts
+  repo: https://github.com/boeboe/istio-helm-charts
   includeCRDs: true
   #valuesFile: values.yaml
