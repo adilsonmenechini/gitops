@@ -70,7 +70,45 @@ grafana:
     enabled: true
     storageClassName: standard
     size: 1Gi
+  plugins:
+    - grafana-piechart-panel
+  resources:
+    limits:
+      cpu: 500m
+      memory: 128Mi
+    requests:
+      cpu: 25m
+      memory: 64Mi
 
+  sidecar:
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 5m
+        memory: 64Mi
+
+  prometheusOperator:
+  resources:
+    limits:
+      cpu: 1
+      memory: 512Mi
+    requests:
+      cpu: 50m
+      memory: 128Mi
+  priorityClassName: high-priority
+
+  prometheus-node-exporter:
+  resources:
+    limits:
+      cpu: 50m
+      memory: 50Mi
+    requests:
+      cpu: 5m
+      memory: 16Mi
+  priorityClassName: high-priority
+  
 prometheusOperator:
   admissionWebhooks:
     enabled: false
