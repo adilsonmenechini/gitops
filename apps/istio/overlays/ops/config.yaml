@@ -18,7 +18,7 @@
 
 appName: istio
 userGivenName: istio
-destNamespace: istio-system
+destNamespace: istio
 destServer: https://kubernetes.default.svc
 srcPath: ''
 #repoURL: https://kubernetes-sigs.github.io/istio-system/
