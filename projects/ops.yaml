@@ -37,7 +37,7 @@ spec:
   - git:
       files:
         - path: apps/**/ops/config.yaml
-      repoURL: https://github.com/devxp-tech/gitops.git
+      repoURL: https://github.com/adilsonmenechini/gitops.git
       requeueAfterSeconds: 20
       revision: ""
       template:
