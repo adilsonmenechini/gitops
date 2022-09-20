@@ -114,6 +114,15 @@ grafana:
     limits:
       cpu: 200m
       memory: 256Mi
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 3
+    metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 75
 
 prometheusOperator:
   admissionWebhooks:
