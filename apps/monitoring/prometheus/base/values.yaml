@@ -195,7 +195,26 @@ grafana:
       label: grafana_datasource
       labelValue: "1"
 
-
+  dashboardProviders:
+    dashboardproviders.yaml:
+      apiVersion: 1
+      providers:
+      - name: 'default'
+        orgId: 1
+        folder: 'Kubernetes Dashboards'
+        type: file
+        disableDeletion: false
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/default
+      - name: 'alertmanager'
+        orgId: 1
+        folder: 'Alertmanager Dashboards'
+        type: file
+        disableDeletion: false
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/alertmanager
 prometheusOperator:
   admissionWebhooks:
     enabled: false
