@@ -14,6 +14,28 @@ alertmanager:
     receivers:
       # TODO: Add email receivers here.
       - name: "null"
+  route:
+    group_by: ['job']
+    group_wait: 30s
+    group_interval: 5m
+    repeat_interval: 1h
+    receiver: email
+    routes:
+    - match:
+        alertname: Watchdog
+      receiver: 'null'
+    - match:
+        alertname: CPUThrottlingHigh
+      receiver: 'null'
+    - match:
+        alertname: KubeMemoryOvercommit
+      receiver: 'null'
+    - match:
+        alertname: KubeCPUOvercommit
+      receiver: 'null'
+    - match:
+        alertname: KubeletTooManyPods
+      receiver: 'null'
   alertmanagerSpec:
     resources:
       limits:
