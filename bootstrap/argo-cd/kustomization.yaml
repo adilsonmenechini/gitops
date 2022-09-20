@@ -9,6 +9,7 @@ configMapGenerator:
     behavior: merge
     literals:
       - "timeout.reconciliation=15s"
+      - admin.enabled=true
       - kustomize.buildOptions="--enable-alpha-plugins --enable-helm --load-restrictor LoadRestrictionsNone"
       - |
         repository.credentials=- passwordSecret:
