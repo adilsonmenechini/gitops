@@ -23,11 +23,11 @@ destServer: https://kubernetes.default.svc
 srcPath: ''
 #repoURL: https://kubernetes-sigs.github.io/istio-system/
 srcRepoURL: https://github.com/istio/istio/tree/master/operator
-srcTargetRevision: ">=2.7.2"
+srcTargetRevision: '1.7.0'
 labels:
 exclude: ''
 include: ''
 helm:
-  chart: istio
+  chart: istio-operator
   valueFiles: values
   values: |-
