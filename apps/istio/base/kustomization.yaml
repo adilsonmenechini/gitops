@@ -8,7 +8,7 @@ helmCharts:
   includeCRDs: true
   valuesInline:
     global:
-      istioNamespace: istio-system
+      istioNamespace: istio
       configValidation: false
       istiod:
         enableAnalysis: true
@@ -34,7 +34,7 @@ helmCharts:
       autoscalingv2API: false
     meshConfig:
       defaultConfig:
-        discoveryAddress: istiod.istio-system.svc:15012
+        discoveryAddress: istiod.istio.svc:15012
     telemetry:
       enabled: true
       configValidation: false
@@ -50,6 +50,6 @@ helmCharts:
     labels:
       app_label: istio-ingressgateway
     podAnnotations:
-      proxy.istio.io/config: '{"discoveryAddress" : "istiod.istio-system.svc:15012" }'
+      proxy.istio.io/config: '{"discoveryAddress" : "istiod.istio.svc:15012" }'
     autoscaling:
       enabled: false
