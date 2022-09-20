@@ -6,6 +6,12 @@ helmCharts:
   version: 1.13.3
   repo: https://istio-release.storage.googleapis.com/charts
   includeCRDs: true
+  valuesInline:
+    global:
+      istioNamespace: istio-system
+      configValidation: false
+      istiod:
+        enableAnalysis: true
 - name: istiod
   releaseName: istiod
   version: 1.13.3
