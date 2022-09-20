@@ -11,4 +11,8 @@ helmCharts:
   version: 1.13.3
   repo: https://istio-release.storage.googleapis.com/charts
   includeCRDs: true
-
+- name: gateway 
+  releaseName: gateway 
+  version: 1.13.3
+  repo: https://istio-release.storage.googleapis.com/charts
+  includeCRDs: true
