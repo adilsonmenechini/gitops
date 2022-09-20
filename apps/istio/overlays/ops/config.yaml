@@ -1,16 +1,33 @@
-apiVersion: v1
-name: istio
+# apiVersion: v1
+# name: istio
+# userGivenName: istio
+# destNamespace: istio
+# destServer: https://kubernetes.default.svc
+# srcPath: ''
+# version: 1.7.0
+# tillerVersion: ">=2.7.2"
+# description: Helm chart for deploying Istio operator
+# keywords:
+#   - istio
+#   - operator
+# sources:
+#   - https://github.com/istio/istio/tree/master/operator
+# engine: gotpl
+# icon: https://istio.io/latest/favicons/android-192x192.png
+
+
+appName: istio
 userGivenName: istio
-destNamespace: istio
+destNamespace: istio-system
 destServer: https://kubernetes.default.svc
 srcPath: ''
-version: 1.7.0
-tillerVersion: ">=2.7.2"
-description: Helm chart for deploying Istio operator
-keywords:
-  - istio
-  - operator
-sources:
-  - https://github.com/istio/istio/tree/master/operator
-engine: gotpl
-icon: https://istio.io/latest/favicons/android-192x192.png
+#repoURL: https://kubernetes-sigs.github.io/istio-system/
+srcRepoURL: https://github.com/istio/istio/tree/master/operator
+srcTargetRevision: '1.8.0'
+labels:
+exclude: ''
+include: ''
+helm:
+  chart: istio
+  valueFiles: values
+  values: |-
