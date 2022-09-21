@@ -88,8 +88,7 @@ sidecar:
     enabled: true
     label: grafana_dashboard
     labelValue: "1"
-    folder: /var/lib/grafana/dashboards/external
-    folderAnnotation: null
+
 #      searchNamespace: ALL
     provider:
       disableDelete: false
