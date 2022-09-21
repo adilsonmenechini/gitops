@@ -21,10 +21,14 @@ autoscaling:
     resource:
       name: cpu
       targetAverageUtilization: 90
-      
+  - type: Resource
+    resource:
+      name: memory
+      targetAverageUtilization: 90
+
 persistence:
   type: pvc
-  enabled: false
+  enabled: true
   # storageClassName: default
   accessModes:
     - ReadWriteOnce
