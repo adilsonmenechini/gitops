@@ -25,15 +25,15 @@ argocd-autopilot project create ops
 argocd-autopilot app create argo-events --app github.com/argoproj-labs/argocd-autopilot/examples/demo-app/ -p ops --labels "istio-injection=enabled"  --dest-namespace argo-events
 
 
-argocd-autopilot app create istio-ingress \
+argocd-autopilot app create istio \
  --app https://istio-release.storage.googleapis.com/charts \
-  -p ops --labels "istio-injection=enabled"  --dest-namespace istio-ingress \
+  -p ops --labels "istio-injection=enabled"  --dest-namespace istio \
   --type kustomize
 
 
 argocd-autopilot app create monitoring/prometheus \
  --app https://prometheus-community.github.io/helm-charts \
- -p ops --dest-namespace monitoring \
+ -p ops --dest-namespace monitoring --labels "istio-injection=enabled"\
  --type kustomize
 
 
