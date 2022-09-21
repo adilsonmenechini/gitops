@@ -14,3 +14,7 @@ helmCharts:
       proxy.istio.io/config: '{"discoveryAddress" : "istiod.istio.svc:15012" }'
     autoscaling:
       enabled: false
+    resources:
+      requests:
+        cpu: 200m
+        memory: 256Mi
