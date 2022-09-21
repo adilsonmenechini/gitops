@@ -1,9 +1,9 @@
 {
-  "appName": "prometheus",
-  "userGivenName": "prometheus",
-  "destNamespace": "monitoring",
+  "appName": "grafana",
+  "userGivenName": "grafana",
+  "destNamespace": "observability",
   "destServer": "https://kubernetes.default.svc",
-  "srcPath": "apps/monitoring/prometheus/overlays/ops",
+  "srcPath": "apps/observability/grafana/overlays/ops",
   "srcRepoURL": "https://github.com/adilsonmenechini/gitops.git",
   "srcTargetRevision": "",
   "labels": {

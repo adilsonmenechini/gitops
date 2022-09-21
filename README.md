@@ -31,9 +31,9 @@ argocd-autopilot app create istio \
   --type kustomize
 
 
-argocd-autopilot app create monitoring/prometheus \
+argocd-autopilot app create observability/prometheus \
  --app https://prometheus-community.github.io/helm-charts \
- -p ops --dest-namespace monitoring --labels "istio-injection=enabled"\
+ -p ops --dest-namespace observability --labels "istio-injection=enabled"\
  --type kustomize
 
 
@@ -44,7 +44,7 @@ argocd-autopilot app delete prometheus -p ops
 kubectl port-forward -n argocd svc/argocd-server 8080:80
 
 
-kubectl -n monitoring port-forward svc/kube-prometheus-stack-grafana 3000:80
-kubectl get secret kube-prometheus-stack-grafana -o jsonpath="{.data.admin-password}" -n monitoring | base64 --decode ; echo
+kubectl -n observability port-forward svc/kube-prometheus-stack-grafana 3000:80
+kubectl get secret kube-prometheus-stack-grafana -o jsonpath="{.data.admin-password}" -n observability | base64 --decode ; echo
 
 ```
