@@ -1,8 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 helmCharts:
-- name: kiali 
-  releaseName: kiali
+- name: kiali-server 
+  releaseName: kiali-server
   version: v1.41.0
   repo: https://kiali.org/helm-charts
   includeCRDs: true
