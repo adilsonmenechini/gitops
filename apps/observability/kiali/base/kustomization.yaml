@@ -6,3 +6,43 @@ helmCharts:
   version: v1.41.0
   repo: https://kiali.org/helm-charts
   includeCRDs: true
+  valuesInline:
+  enabled: true
+  fullnameOverride: kiali
+
+  istio_namespace: istio
+  auth:
+    strategy: anonymous
+  deployment:
+    service_type: LoadBalancer
+  external_services:
+    istio:
+      component_status:
+        components:
+        - app_label: istiod
+          is_core: true
+          is_proxy: false
+        - app_label: istio-ingressgateway
+          is_core: true
+          is_proxy: true
+        - app_label: istio-eastwestgateway
+          is_core: false
+          is_proxy: true
+        - app_label: istio-egressgateway
+          is_core: false
+          is_proxy: true
+    grafana:
+      auth:
+        password: istio
+        username: admin
+      in_cluster_url: http://grafana:80
+      url: http://grafana.example.com
+    prometheus:
+      url: http://prometheus:80
+    tracing:
+      in_cluster_url: http://jaeger-query:80
+      url: http://jaeger.example.com
+      use_grpc: false
+      whitelist_istio_system: ["jaeger-query", "istio-ingressgateway", "istio-eastwestgateway", "istio-egressgateway"]
+  server:
+    port: 80

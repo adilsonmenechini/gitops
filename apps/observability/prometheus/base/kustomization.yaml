@@ -6,3 +6,23 @@ helmCharts:
   version: 14.9.1
   repo: https://prometheus-community.github.io/helm-charts
   includeCRDs: true
+  valuesInline:
+  prometheus:
+    enabled: true
+    fullnameOverride: prometheus
+
+    alertmanager:
+      fullnameOverride: prometheus-alertmanager
+    kubeStateMetrics:
+      enabled: true
+    kube-state-metrics:
+      fullnameOverride: kube-state-metrics
+    nodeExporter:
+      fullnameOverride: prometheus-node-exporter
+    pushgateway:
+      fullnameOverride: prometheus-pushgateway
+      enabled: false
+    server:
+      fullnameOverride: prometheus
+      service:
+        type: LoadBalancer 

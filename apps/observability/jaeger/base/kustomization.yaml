@@ -6,3 +6,23 @@ helmCharts:
   version: 0.61.0
   repo: https://jaegertracing.github.io/helm-charts
   includeCRDs: true
+  valuesInline:
+    enabled: true
+    fullnameOverride: jaeger
+    agent:
+      fullnameOverride: jaeger-agent-bond
+    collector:
+      fullnameOverride: jaeger-collector
+      service:
+        zipkin:
+          port: 9411
+    query:
+      fullnameOverride: jaeger-query
+      service:
+        type: LoadBalancer
+    storage:
+      cassandra:
+        nameOverride: cassandra
+    # https://github.com/helm/charts/tree/master/incubator/cassandra
+    cassandra:
+      fullnameOverride: cassandra
