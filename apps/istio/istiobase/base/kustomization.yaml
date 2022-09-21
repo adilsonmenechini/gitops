@@ -3,7 +3,7 @@ kind: Kustomization
 helmCharts:
 - name: base 
   releaseName: base 
-  version: 1.13.3
+  version: 1.15.0
   repo: https://istio-release.storage.googleapis.com/charts
   includeCRDs: true
   valuesInline:
