@@ -16,34 +16,13 @@ helmCharts:
       service:
         zipkin:
           port: 9411
-      resources: 
-        limits:
-          cpu: 500m
-          memory: 512Mi
-        requests:
-          cpu: 256m
-          memory: 128Mi
     query:
       fullnameOverride: jaeger-query
       service:
         type: LoadBalancer
-      resources: 
-        limits:
-          cpu: 500m
-          memory: 512Mi
-        requests:
-          cpu: 256m
-          memory: 128Mi
     storage:
       cassandra:
         nameOverride: cassandra
     # https://github.com/helm/charts/tree/master/incubator/cassandra
     cassandra:
       fullnameOverride: cassandra
-      resources: 
-        limits:
-          cpu: 2000m
-          memory: 1024Mi
-        requests:
-          cpu: 500m
-          memory: 512Mi
