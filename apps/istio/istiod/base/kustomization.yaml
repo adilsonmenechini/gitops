@@ -1,0 +1,26 @@
+- name: istiod
+  releaseName: istiod
+  version: 1.13.3
+  repo: https://istio-release.storage.googleapis.com/charts
+  includeCRDs: true
+  valuesInline:
+    fullnameOverride: istiod
+    global:
+      trustDomain: "localhost.local"
+      proxy:
+        clusterDomain: "localhost.local"
+      # Resources for the sidecar.
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 100m
+            memory: 128Mi
+      autoscalingv2API: false
+    meshConfig:
+      defaultConfig:
+        discoveryAddress: istiod.istio.svc:15012
+    telemetry:
+      enabled: true
+      configValidation: false

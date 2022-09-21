@@ -1,0 +1,13 @@
+- name: gateway 
+  releaseName: gateway 
+  version: 1.13.3
+  repo: https://istio-release.storage.googleapis.com/charts
+  includeCRDs: true
+  valuesInline:
+    name: istio-ingressgateway
+    labels:
+      app_label: istio-ingressgateway
+    podAnnotations:
+      proxy.istio.io/config: '{"discoveryAddress" : "istiod.istio.svc:15012" }'
+    autoscaling:
+      enabled: false

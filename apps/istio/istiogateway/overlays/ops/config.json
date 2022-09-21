@@ -1,9 +1,9 @@
 {
-  "appName": "istio",
-  "userGivenName": "istio",
+  "appName": "istio-gateway",
+  "userGivenName": "istio-gateway",
   "destNamespace": "istio",
   "destServer": "https://kubernetes.default.svc",
-  "srcPath": "apps/istio/overlays/ops",
+  "srcPath": "apps/istiogateway/overlays/ops",
   "srcRepoURL": "https://github.com/adilsonmenechini/gitops.git",
   "srcTargetRevision": "",
   "labels": {
