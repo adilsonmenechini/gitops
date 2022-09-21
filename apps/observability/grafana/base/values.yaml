@@ -92,7 +92,7 @@ sidecar:
     labelValue: "1"
     folder: /var/lib/grafana/dashboards/external
     folderAnnotation: grafana.localhost/dashboard-folder
-#      searchNamespace: ALL
+    searchNamespace: ALL
     provider:
       disableDelete: false
       allowUiUpdates: true
