@@ -81,6 +81,7 @@ notifiers:
 
 
 sidecar:
+  skipTlsVerify: true
   plugins:
     enabled: true
   notifiers:
