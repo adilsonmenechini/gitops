@@ -3,25 +3,7 @@ kind: Kustomization
 helmCharts:
 - name: prometheus 
   releaseName: prometheus
-  version: 14.9.1
+  version: 15.13.0
   repo: https://prometheus-community.github.io/helm-charts
   includeCRDs: true
-  valuesInline:
-    enabled: true
-    fullnameOverride: prometheus
-
-    alertmanager:
-      fullnameOverride: prometheus-alertmanager
-    kubeStateMetrics:
-      enabled: true
-    kube-state-metrics:
-      fullnameOverride: kube-state-metrics
-    nodeExporter:
-      fullnameOverride: prometheus-node-exporter
-    pushgateway:
-      fullnameOverride: prometheus-pushgateway
-      enabled: false
-    server:
-      fullnameOverride: prometheus
-      service:
-        type: LoadBalancer 
+  valuesFile: values.yaml
