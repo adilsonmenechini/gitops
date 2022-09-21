@@ -4,6 +4,14 @@ fullnameOverride: grafana
 adminUser: admin
 adminPassword: istio
 
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 200m
+    memory: 256Mi
+
 autoscaling:
   enabled: true
   minReplicas: 1
