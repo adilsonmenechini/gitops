@@ -3,6 +3,6 @@ kind: Kustomization
 helmCharts:
 - name: jaeger 
   releaseName: jaeger
-  version: 0.47.0
+  version: 0.61.0
   repo: https://jaeger-community.github.io/helm-charts
   includeCRDs: true
