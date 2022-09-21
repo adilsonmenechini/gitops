@@ -3,7 +3,7 @@
   "userGivenName": "istiod",
   "destNamespace": "istio",
   "destServer": "https://kubernetes.default.svc",
-  "srcPath": "apps/istiod/overlays/ops",
+  "srcPath": "apps/istio/istiod/overlays/ops",
   "srcRepoURL": "https://github.com/adilsonmenechini/gitops.git",
   "srcTargetRevision": "",
   "labels": {
