@@ -26,3 +26,11 @@ helmCharts:
     # https://github.com/helm/charts/tree/master/incubator/cassandra
     cassandra:
       fullnameOverride: cassandra
+    schema:
+      resources: 
+        limits:
+          cpu: 500m
+          memory: 512Mi
+        requests:
+          cpu: 256m
+          memory: 128Mi
