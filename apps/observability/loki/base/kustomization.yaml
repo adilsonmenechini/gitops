@@ -8,6 +8,3 @@ helmCharts:
   repo: https://grafana.github.io/helm-charts
   valuesInline:
     fullnameOverride: loki
-    # global:
-    #   dnsService: coredns
-    #   clusterDomain: localhost.local

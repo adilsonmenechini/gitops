@@ -39,10 +39,5 @@ helmCharts:
         url: http://grafana.localhost
       prometheus:
         url: http://prometheus:80
-      tracing:
-        in_cluster_url: http://jaeger-query:80
-        url: http://jaeger.localhost
-        use_grpc: false
-        whitelist_istio_system: ["jaeger-query", "istio-ingressgateway", "istio-eastwestgateway", "istio-egressgateway"]
     server:
       port: 80
