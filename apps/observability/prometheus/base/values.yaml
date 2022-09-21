@@ -1,3 +1,6 @@
+fullnameOverride: prometheus
+  kubeStateMetrics:
+    enabled: false
 server:
   alertmanagers:
     - scheme: http
@@ -248,12 +251,12 @@ serverFiles:
           description: "Kubernetes API server is experiencing high error rate\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
   prometheus.yml:
-    # alerting:
-    #   alertmanagers:
-    #   - scheme: http
-    #     static_configs:
-    #     - targets:
-    #       - "prometheus-alertmanager.observability.svc"
+    alerting:
+      alertmanagers:
+      - scheme: http
+        static_configs:
+        - targets:
+          - "prometheus-alertmanager.observability.svc"
     scrape_configs:
       - job_name: serviceMonitor/argocd/argocd-metrics/0
         honor_timestamps: true
