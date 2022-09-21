@@ -1,7 +1,7 @@
 {
   "appName": "istiod",
   "userGivenName": "istiod",
-  "destNamespace": "istio",
+  "destNamespace": "istio-system",
   "destServer": "https://kubernetes.default.svc",
   "srcPath": "apps/istio/istiod/overlays/ops",
   "srcRepoURL": "https://github.com/adilsonmenechini/gitops.git",

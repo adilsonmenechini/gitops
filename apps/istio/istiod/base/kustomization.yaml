@@ -23,7 +23,7 @@ helmCharts:
       autoscalingv2API: false
     meshConfig:
       defaultConfig:
-        discoveryAddress: istiod.istio.svc:15012
+        discoveryAddress: istiod.istio-system.svc:15012
     telemetry:
       enabled: true
       configValidation: false

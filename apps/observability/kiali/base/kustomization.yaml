@@ -10,7 +10,7 @@ helmCharts:
     enabled: true
     fullnameOverride: kiali
 
-    istio_namespace: istio
+    istio_namespace: istio-system
     auth:
       strategy: anonymous
     deployment:

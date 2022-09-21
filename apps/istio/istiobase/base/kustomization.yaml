@@ -8,7 +8,7 @@ helmCharts:
   includeCRDs: true
   valuesInline:
     global:
-      istioNamespace: istio
+      istionamespace: istio-system
       configValidation: false
       istiod:
         enableAnalysis: true
