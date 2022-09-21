@@ -1,9 +1,9 @@
 {
-  "appName": "prometheus",
-  "userGivenName": "prometheus",
+  "appName": "jaeger",
+  "userGivenName": "jaeger",
   "destNamespace": "monitoring",
   "destServer": "https://kubernetes.default.svc",
-  "srcPath": "apps/monitoring/prometheus/overlays/ops",
+  "srcPath": "apps/monitoring/jaeger/overlays/ops",
   "srcRepoURL": "https://github.com/adilsonmenechini/gitops.git",
   "srcTargetRevision": "",
   "labels": {
