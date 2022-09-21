@@ -21,6 +21,17 @@ autoscaling:
     resource:
       name: cpu
       targetAverageUtilization: 90
+      
+persistence:
+  type: pvc
+  enabled: false
+  # storageClassName: default
+  accessModes:
+    - ReadWriteOnce
+  size: 1Gi
+  # annotations: {}
+  finalizers:
+    - kubernetes.io/pvc-protection
 
 datasources:
   datasources.yaml:
