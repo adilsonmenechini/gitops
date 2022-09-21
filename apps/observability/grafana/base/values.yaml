@@ -4,6 +4,10 @@ fullnameOverride: grafana
 adminUser: admin
 adminPassword: istio
 
+grafana.ini:
+  server:
+    domain: grafana.localhost
+
 resources:
   requests:
     cpu: 100m
@@ -33,9 +37,6 @@ persistence:
   accessModes:
     - ReadWriteOnce
   size: 1Gi
-  # annotations: {}
-  finalizers:
-    - kubernetes.io/pvc-protection
 
 datasources:
   datasources.yaml:
