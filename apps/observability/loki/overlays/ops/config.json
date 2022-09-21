@@ -1,9 +1,9 @@
 {
-  "appName": "jaeger",
-  "userGivenName": "jaeger",
+  "appName": "loki",
+  "userGivenName": "loki",
   "destNamespace": "observability",
   "destServer": "https://kubernetes.default.svc",
-  "srcPath": "apps/observability/jaeger/overlays/ops",
+  "srcPath": "apps/observability/loki/overlays/ops",
   "srcRepoURL": "https://github.com/adilsonmenechini/gitops.git",
   "srcTargetRevision": "",
   "labels": {
