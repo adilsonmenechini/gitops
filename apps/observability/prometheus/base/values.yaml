@@ -1,12 +1,6 @@
 fullnameOverride: prometheus
   kubeStateMetrics:
     enabled: false
-server:
-  alertmanagers:
-    - scheme: http
-      static_configs:
-      - targets:
-        - "prometheus-alertmanager.observability.svc"
 
 serverFiles:
   alerting_rules.yml:
