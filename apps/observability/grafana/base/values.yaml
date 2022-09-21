@@ -3,6 +3,17 @@ fullnameOverride: grafana
 
 adminUser: admin
 adminPassword: istio
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      targetAverageUtilization: 90
+
 datasources:
   datasources.yaml:
     apiVersion: 1
@@ -171,3 +182,6 @@ dashboards:
     istio-workload-dashboard:
       datasource: Prometheus
       file: "dashboards/istio/istio-workload-dashboard.json"
+    pilot-dashboard:
+      datasource: Prometheus
+      file: "dashboards/istio/pilot-dashboard.json"
