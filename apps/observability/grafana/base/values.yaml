@@ -79,26 +79,26 @@ notifiers:
     delete_notifiers: []
 
 
-# sidecar:
-#   plugins:
-#     enabled: true
-#   notifiers:
-#     enabled: false
-#   dashboards:
-#     enabled: true
-#     label: grafana_dashboard
-#     labelValue: "1"
-#     folder: /var/lib/grafana/dashboards/external
-#     folderAnnotation: grafana.localhost/dashboard-folder
-# #      searchNamespace: ALL
-#     provider:
-#       disableDelete: false
-#       allowUiUpdates: true
-#       foldersFromFilesStructure: true
-#   datasources:
-#     enabled: false
-#     label: grafana_datasource
-#     labelValue: "1"
+sidecar:
+  plugins:
+    enabled: true
+  notifiers:
+    enabled: false
+  dashboards:
+    enabled: true
+    label: grafana_dashboard
+    labelValue: "1"
+    folder: /var/lib/grafana/dashboards/external
+    folderAnnotation: grafana.localhost/dashboard-folder
+#      searchNamespace: ALL
+    provider:
+      disableDelete: false
+      allowUiUpdates: true
+      foldersFromFilesStructure: true
+  datasources:
+    enabled: false
+    label: grafana_datasource
+    labelValue: "1"
 
 
 plugins:
