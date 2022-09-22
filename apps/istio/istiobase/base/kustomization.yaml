@@ -5,7 +5,7 @@ resources:
 helmCharts:
 - name: base 
   releaseName: base 
-  version: 1.15.0
+  version: 1.14.4
   repo: https://istio-release.storage.googleapis.com/charts
   includeCRDs: true
   valuesInline:
