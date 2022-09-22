@@ -11,6 +11,6 @@ helmCharts:
   valuesInline:
     global:
       istionamespace: istio-system
-      # configValidation: false
-      istiod:
-        enableAnalysis: true
+      configValidation: false
+      # istiod:
+      #   enableAnalysis: true
