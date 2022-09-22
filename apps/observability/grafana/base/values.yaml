@@ -65,17 +65,17 @@ datasources:
       jsonData:
         manageAlerts: true
         alertmanagerUid: alertmanager
-# notifiers:
-#   notifiers.yaml:
-#     notifiers:
-#       - name: prometheus-alertmanager
-#         type: prometheus-alertmanager
-#         uid: prometheus-alertmanager
-#         org_id: 1
-#         is_default: true
-#         settings:
-#           file: http://prometheus-alertmanager
-#     delete_notifiers: []
+notifiers:
+  notifiers.yaml:
+    notifiers:
+      - name: prometheus-alertmanager
+        type: prometheus-alertmanager
+        uid: prometheus-alertmanager
+        org_id: 1
+        is_default: true
+        settings:
+          file: http://prometheus-alertmanager
+    delete_notifiers: []
 
 
 sidecar:
