@@ -4,7 +4,9 @@ server:
       static_configs:
       - targets:
         - "prometheus-alertmanager.observability.svc"
-
+serviceMonitor:
+  namespace: observability
+  
 serverFiles:
   alerting_rules.yml:
     groups:
