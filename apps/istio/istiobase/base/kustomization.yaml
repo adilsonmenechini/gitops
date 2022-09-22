@@ -9,8 +9,9 @@ helmCharts:
   repo: https://istio-release.storage.googleapis.com/charts
   includeCRDs: true
   valuesInline:
+    failurePolicy: Fail
     global:
       istionamespace: istio-system
       configValidation: false
-      # istiod:
-      #   enableAnalysis: true
+      istiod:
+        enableAnalysis: true
