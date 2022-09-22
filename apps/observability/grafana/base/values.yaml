@@ -35,6 +35,8 @@ persistence:
   accessModes:
     - ReadWriteOnce
   size: 1Gi
+  finalizers:
+    - kubernetes.io/pvc-protection
 
 datasources:
   datasources.yaml:
